@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${jakarta.variable} h-full`}>
       <body className="font-sans min-h-screen flex flex-col bg-[#F9FAFB] text-[#111827] antialiased">
 
-        <header className="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-slate-200/60">
+        <header className="sticky top-0 z-100 bg-white/80 backdrop-blur-md border-b border-slate-200/60">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
 

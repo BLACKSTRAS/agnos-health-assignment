@@ -112,7 +112,7 @@ export default function StaffPage() {
 
   return (
     <div className="bg-[#F8FAFC] min-h-screen flex justify-center p-0 sm:p-4 lg:p-6 relative">
-      <div className="w-full max-w-[1600px] flex flex-col lg:flex-row items-start gap-0 sm:gap-6">
+      <div className="w-full max-w-400 flex flex-col lg:flex-row items-start gap-0 sm:gap-6">
         <aside className={`w-full lg:w-96 flex flex-col bg-white sm:rounded-3xl shadow-sm border-x sm:border border-slate-200/80 shrink-0 ${showMobileDetails ? 'hidden lg:flex' : 'flex'} lg:sticky lg:top-6 lg:h-[calc(100vh-48px)] h-screen lg:overflow-hidden`}>
           <div className="p-5 sm:p-6 border-b border-slate-100 bg-white/95 backdrop-blur-md z-20 shrink-0 pt-8 sm:pt-6 sticky top-0 sm:rounded-t-3xl lg:static">
             <div className="flex items-center justify-between mb-5">
@@ -186,7 +186,7 @@ export default function StaffPage() {
 
         <main className={`flex-1 w-full flex-col gap-4 sm:gap-6 pb-6 ${!showMobileDetails ? 'hidden lg:flex' : 'flex min-h-screen lg:min-h-0'}`}>
           {!activePatient ? (
-            <div className="bg-white sm:rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 min-h-[500px]">
+            <div className="bg-white sm:rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 min-h-125">
               <Activity size={48} className="mb-4 text-slate-200" />
               <p className="font-bold text-lg text-slate-500">Awaiting Patient Connection</p>
               <p className="text-sm mt-1">Select a patient from the directory to view details.</p>
@@ -253,7 +253,7 @@ export default function StaffPage() {
                       <MapPin size={14} className="text-blue-500" /> ที่อยู่ & การสื่อสาร
                     </h3>
                     <div className="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-100">
-                      <p className="text-sm font-semibold text-slate-800 leading-relaxed break-words">
+                      <p className="text-sm font-semibold text-slate-800 leading-relaxed wrap-break-word">
                         {activePatient.address || <span className="text-slate-400 italic">No address provided.</span>}
                       </p>
                       <div className="mt-4 pt-4 border-t border-slate-200/60">
@@ -285,7 +285,7 @@ export default function StaffPage() {
       </div>
 
       {showDeleteModal && activePatient && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
           <div className="bg-white rounded-3xl p-8 sm:p-10 max-w-sm w-full shadow-2xl flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-6">
               <AlertTriangle className="text-red-500" size={32} />
@@ -313,7 +313,7 @@ export default function StaffPage() {
 }
 
 const StatCard = ({ icon, title, value, subtitle, children, className = "" }: any) => (
-  <div className={`bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between min-h-[85px] ${className}`}>
+  <div className={`bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between min-h-21.25 ${className}`}>
     <div className="flex items-center gap-2 text-slate-500 mb-2">
       {icon}
       <span className="text-[9px] font-black uppercase tracking-widest">{title}</span>

@@ -179,7 +179,7 @@ export default function PatientPage() {
                                             <div>
                                                 <label className={THEME.label}>ที่อยู่ปัจจุบัน (Full Residential Address) *</label>
                                                 <textarea
-                                                    className={`${THEME.input} ${errors.address ? THEME.inputError : ''} min-h-[120px] resize-none py-4`}
+                                                    className={`${THEME.input} ${errors.address ? THEME.inputError : ''} min-h-30 resize-none py-4`}
                                                     value={patientData.address}
                                                     onChange={e => updateField('address', e.target.value)}
                                                     maxLength={300}
@@ -235,8 +235,8 @@ export default function PatientPage() {
                 </footer>
             </div>
             {showSuccessModal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-white rounded-[2rem] p-8 sm:p-10 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col items-center text-center">
+                <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-4xl p-8 sm:p-10 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col items-center text-center">
                         <div className="w-16 h-16 rounded-full bg-[#E8F8F0] flex items-center justify-center mb-6">
                             <Check className="text-[#00B873]" size={36} strokeWidth={3.5} />
                         </div>
