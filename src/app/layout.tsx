@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google"; // ใช้ฟอนต์ที่ดูทันสมัยกว่าเดิม
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Link from "next/link";
 import { PatientProvider } from '@/store/PatientContext';
-import { 
-  ShieldCheck, 
-  LayoutDashboard, 
-  UserPlus, 
+import {
+  ShieldCheck,
+  LayoutDashboard,
+  UserPlus,
   Activity,
   Fingerprint
 } from 'lucide-react';
 import "./globals.css";
 
-// ฟอนต์ Jakarta Sans จะให้ความรู้สึก Premium และ Modern กว่า Inter ปกติ
-const jakarta = Plus_Jakarta_Sans({ 
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: '--font-jakarta',
 });
@@ -26,13 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${jakarta.variable} h-full`}>
       <body className="font-sans min-h-screen flex flex-col bg-[#F9FAFB] text-[#111827] antialiased">
-        
-        {/* --- Advanced Navigation --- */}
-        <header className="sticky top-0 z-100 bg-white/80 backdrop-blur-md border-b border-slate-200/60">
+
+        <header className="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-slate-200/60">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
-              
-              {/* Brand Identity */}
+
               <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-all">
                 <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-blue-600 to-indigo-700 shadow-md shadow-blue-200">
                   <Activity className="text-white" size={20} strokeWidth={2.5} />
@@ -48,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </div>
               </Link>
 
-              {/* Navigation Menu */}
               <div className="flex items-center gap-1.5 sm:gap-3">
                 <Link
                   href="/patient"
@@ -57,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <UserPlus size={15} strokeWidth={2.5} className="transition-transform group-hover:scale-110" />
                   <span>REGISTRATION</span>
                 </Link>
-                
+
                 <div className="h-6 w-px bg-slate-200 mx-1 hidden sm:block"></div>
 
                 <Link
@@ -73,21 +69,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        {/* --- Dynamic Content Body --- */}
         <main className="flex-1">
           <PatientProvider>
-            {/* ใส่ Wrapper เล็กน้อยเพื่อให้เนื้อหาไม่ติดขอบเกินไปในบางหน้า */}
             <div className="animate-in fade-in duration-700">
               {children}
             </div>
           </PatientProvider>
         </main>
 
-        {/* --- Global Professional Footer --- */}
         <footer className="bg-white border-t border-slate-200/60 py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-              
+
               <div className="flex flex-col items-center md:items-start gap-4">
                 <div className="flex items-center gap-5 text-slate-400">
                   <div className="flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 border border-slate-100">
@@ -106,9 +99,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               <div className="flex justify-center md:justify-end gap-8">
                 {['Security', 'Privacy', 'Status', 'API'].map((item) => (
-                  <a 
-                    key={item} 
-                    href="#" 
+                  <a
+                    key={item}
+                    href="#"
                     className="text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors"
                   >
                     {item}

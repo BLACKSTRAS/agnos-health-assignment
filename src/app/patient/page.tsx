@@ -41,6 +41,7 @@ export default function PatientPage() {
 
     useEffect(() => setMounted(true), []);
     const todayISO = useMemo(() => new Date().toISOString().split("T")[0], []);
+
     const validateStep = () => {
         const newErrors: Record<string, string> = {};
         if (currentStep === 0) {
@@ -78,7 +79,7 @@ export default function PatientPage() {
 
     const handleSuccessConfirm = () => {
         setShowSuccessModal(false);
-        if (resetForm) resetForm(); 
+        if (resetForm) resetForm();
         setCurrentStep(0);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -106,9 +107,10 @@ export default function PatientPage() {
                         </div>
                     </div>
                 </nav>
+
                 <main className={THEME.card}>
                     <div className="flex flex-col lg:flex-row flex-1">
-                        <div className="hidden lg:flex w-72 bg-slate-50 border-r border-slate-100 p-10 flex-col justify-between shrink-0">
+                        <aside className="hidden lg:flex w-72 bg-slate-50 border-r border-slate-100 p-10 flex-col justify-between shrink-0">
                             <div className="space-y-8">
                                 {STEPS.map((step, idx) => (
                                     <div key={step.id} className={`flex items-center gap-4 transition-all duration-300 ${idx === currentStep ? 'translate-x-2' : 'opacity-40'}`}>
@@ -126,9 +128,10 @@ export default function PatientPage() {
                                 </div>
                                 <p className="text-[10px] text-slate-400 leading-relaxed font-medium">ข้อมูลของคุณถูกเข้ารหัสความปลอดภัยระดับมาตรฐานสากล (AES-256)</p>
                             </div>
-                        </div>
+                        </aside>
+
                         <div className="lg:hidden bg-slate-50 border-b border-slate-100 p-4 flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-200 shrink-0">
+                            <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shrink-0">
                                 {(() => {
                                     const Icon = STEPS[currentStep].icon;
                                     return <Icon size={18} />;
@@ -139,6 +142,7 @@ export default function PatientPage() {
                                 <h3 className="text-sm font-bold text-slate-900">{STEPS[currentStep].shortLabel}</h3>
                             </div>
                         </div>
+
                         <div className="flex-1 p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
                             <div className="flex-1">
                                 {currentStep === 0 && (
@@ -175,7 +179,7 @@ export default function PatientPage() {
                                             <div>
                                                 <label className={THEME.label}>ที่อยู่ปัจจุบัน (Full Residential Address) *</label>
                                                 <textarea
-                                                    className={`${THEME.input} ${errors.address ? THEME.inputError : ''} min-h-30 resize-none py-4`}
+                                                    className={`${THEME.input} ${errors.address ? THEME.inputError : ''} min-h-[120px] resize-none py-4`}
                                                     value={patientData.address}
                                                     onChange={e => updateField('address', e.target.value)}
                                                     maxLength={300}
@@ -214,7 +218,6 @@ export default function PatientPage() {
                                 >
                                     <ChevronLeft size={18} /> <span className="sm:hidden">ย้อนกลับ (Back)</span>
                                 </button>
-
                                 <button onClick={handleNext} className={`${THEME.btnPrimary} flex-1 sm:flex-none`}>
                                     {currentStep === STEPS.length - 1 ? (
                                         <>ยืนยันส่งข้อมูล (SUBMIT) <CheckCircle2 size={18} /></>
@@ -232,21 +235,17 @@ export default function PatientPage() {
                 </footer>
             </div>
             {showSuccessModal && (
-                <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-white rounded-4xl p-8 sm:p-10 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col items-center text-center">
-
-                        <div className="w-18 h-18 rounded-full bg-[#E8F8F0] flex items-center justify-center mb-6">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-[2rem] p-8 sm:p-10 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200 flex flex-col items-center text-center">
+                        <div className="w-16 h-16 rounded-full bg-[#E8F8F0] flex items-center justify-center mb-6">
                             <Check className="text-[#00B873]" size={36} strokeWidth={3.5} />
                         </div>
-
                         <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-1 tracking-tight">ส่งข้อมูลสำเร็จ</h3>
                         <p className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Submission Successful</p>
-
                         <p className="text-sm text-slate-500 leading-relaxed mb-8">
                             ข้อมูลของคุณถูกส่งเข้าระบบเรียบร้อยแล้ว<br />และกำลังได้รับการดำเนินการ<br />
                             <span className="text-xs italic mt-2 block opacity-70">(Your data is now being processed.)</span>
                         </p>
-
                         <button
                             onClick={handleSuccessConfirm}
                             className="w-full px-4 py-3.5 rounded-2xl font-bold text-white bg-[#00B873] hover:bg-[#00a366] transition-all active:scale-[0.98] shadow-lg shadow-emerald-200/50 text-sm sm:text-base"
@@ -266,12 +265,14 @@ const StepHeader = ({ title, desc }: { title: string; desc: string }) => (
         <p className="text-slate-500 text-xs sm:text-sm font-medium leading-relaxed">{desc}</p>
     </div>
 );
+
 interface FieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
     label: string;
     error?: string;
     value?: string;
     onChange: (value: string) => void;
 }
+
 const Input = ({ label, error, onChange, value, ...props }: FieldProps) => (
     <div className="w-full">
         <label className={THEME.label}>{label}</label>
@@ -284,6 +285,7 @@ const Input = ({ label, error, onChange, value, ...props }: FieldProps) => (
         {error && <p className={THEME.errorText}><AlertCircle size={12} /> {error}</p>}
     </div>
 );
+
 const DateInput = ({ label, error, onChange, value, ...props }: FieldProps) => (
     <div className="w-full relative">
         <label className={THEME.label}>{label}</label>
@@ -303,6 +305,7 @@ const DateInput = ({ label, error, onChange, value, ...props }: FieldProps) => (
         {error && <p className={THEME.errorText}><AlertCircle size={12} /> {error}</p>}
     </div>
 );
+
 interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
     label: string;
     options: string[];
@@ -310,6 +313,7 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
     value?: string;
     onChange: (value: string) => void;
 }
+
 const Select = ({ label, options, error, onChange, value, ...props }: SelectProps) => (
     <div className="w-full">
         <label className={THEME.label}>{label}</label>

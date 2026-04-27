@@ -1,8 +1,8 @@
 # Project Implementation Summary
 
-## ✅ Completed Components
+## Completed Components
 
-### 1. Patient Form (`src/components/PatientForm.tsx`)
+### 1. Patient Form (`src/app/patient/page.tsx`)
 - Full form with 15+ fields
 - Comprehensive validation (email, phone, required fields)
 - Error messages and visual feedback
@@ -24,7 +24,7 @@
 - Religion (optional)
 - Emergency Contact (name & relationship, optional)
 
-### 2. Staff View (`src/components/StaffView.tsx`)
+### 2. Staff Dashboard (`src/app/staff/page.tsx`)
 - Real-time patient data display
 - Form completion percentage tracker
 - Status indicators (submitted, actively filling, inactive)
@@ -41,8 +41,8 @@
 - usePatient() hook for easy component access
 
 ### 4. Pages
-- **Patient Page** (`src/app/patient/page.tsx`): Displays PatientForm
-- **Staff Page** (`src/app/staff/page.tsx`): Displays StaffView
+- **Patient Page** (`src/app/patient/page.tsx`): Patient intake form and step flow
+- **Staff Page** (`src/app/staff/page.tsx`): Real-time monitoring dashboard
 - **Home Page** (`src/app/page.tsx`): Overview and navigation
 - **Root Layout** (`src/app/layout.tsx`): Navigation header and footer
 
@@ -50,7 +50,7 @@
 - **README.md**: Complete project overview and setup instructions
 - **DEVELOPMENT.md**: Architecture, development notes, and future enhancements
 
-## 🎨 Design Features
+## Design Features
 
 ### Responsive Layout
 - Mobile: 320px - full width, stacked layout
@@ -70,7 +70,7 @@
 - Hover effects on buttons and cards
 - Error state styling
 
-## 🔄 Real-Time Synchronization
+## Real-Time Synchronization
 
 **How It Works**:
 1. Patient enters data in form
@@ -88,7 +88,7 @@
 - Server-side state management
 - Database persistence
 
-## 📊 Form Validation
+## Form Validation
 
 ### Validation Rules
 - **Email**: Must be valid email format (xxx@xxx.xxx)
@@ -102,7 +102,7 @@
 - Errors clear on user correction
 - Form prevents submission if errors exist
 
-## 📁 File Structure
+## File Structure
 
 ```
 agnos-health/
@@ -112,46 +112,51 @@ agnos-health/
 │   │   ├── page.tsx (home page)
 │   │   ├── globals.css (global styles)
 │   │   ├── patient/
-│   │   │   └── page.tsx (patient form page)
+│   │   │   └── page.tsx (patient intake page)
 │   │   ├── staff/
-│   │   │   └── page.tsx (staff dashboard)
-│   │   └── api/
-│   │       └── sync/ (future WebSocket routes)
-│   ├── components/
-│   │   ├── PatientForm.tsx (patient form component)
-│   │   └── StaffView.tsx (staff monitoring component)
+│   │   │   └── page.tsx (staff monitoring dashboard)
+│   ├── lib/
+│   │   └── supabase.ts (Supabase client)
 │   └── store/
 │       └── PatientContext.tsx (global state management)
 ├── public/ (assets)
 ├── README.md (project documentation)
 ├── DEVELOPMENT.md (development guide)
+├── QUICKSTART.md (setup instructions)
 ├── package.json (dependencies)
 └── tsconfig.json (TypeScript config)
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Install Dependencies**:
    ```bash
    npm install
    ```
 
-2. **Start Development Server**:
+2. **Configure environment variables**:
+   Create a `.env.local` file at the project root with your Supabase values:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+3. **Start development server**:
    ```bash
    npm run dev
    ```
 
-3. **Open in Browser**:
+4. **Open in browser**:
    ```
    http://localhost:3000
    ```
 
-4. **Navigate**:
+5. **Navigate**:
    - Home: http://localhost:3000/
-   - Patient Form: http://localhost:3000/patient
-   - Staff Dashboard: http://localhost:3000/staff
+   - Patient registration: http://localhost:3000/patient
+   - Staff dashboard: http://localhost:3000/staff
 
-## 📋 Testing Instructions
+## Testing Instructions
 
 ### Test Patient Form
 1. Go to `/patient` page
@@ -181,31 +186,31 @@ agnos-health/
 4. Test on desktop (1024px+)
 5. Verify layouts adapt properly
 
-## 🎯 Key Features Implemented
+## Key Features Implemented
 
-✅ Responsive patient form with 12 fields
-✅ Real-time staff monitoring dashboard
-✅ Form validation with error messages
-✅ Status tracking (idle, filling, submitted)
-✅ Form completion percentage
-✅ Animated progress indicators
-✅ Mobile-first responsive design
-✅ TypeScript type safety
-✅ React Context API state management
-✅ Clean, modern UI with TailwindCSS
-✅ Navigation and routing
-✅ Comprehensive documentation
+- Responsive patient form with 12 fields
+- Real-time staff monitoring dashboard
+- Form validation with error messages
+- Status tracking (idle, filling, submitted)
+- Form completion percentage
+- Animated progress indicators
+- Mobile-first responsive design
+- TypeScript type safety
+- React Context API state management
+- Clean, modern UI with TailwindCSS
+- Navigation and routing
+- Comprehensive documentation
 
-## 🔧 Technology Stack
+## Technology Stack
 
 - **Next.js 16.2.4**: React framework
 - **React 19.2.4**: UI library
 - **TypeScript 5**: Type safety
 - **TailwindCSS 4**: Styling
-- **Heroicons 2.2.0**: Icons
+- **Lucide React**: Icons
 - **React Context API**: State management
 
-## 📦 Build & Deploy
+## Build & Deploy
 
 ### Build for Production
 ```bash
@@ -223,7 +228,7 @@ vercel
 - AWS: Use Vercel CLI or manual setup
 - DigitalOcean: Use App Platform
 
-## 🎓 Learning Resources
+## Learning Resources
 
 The project demonstrates:
 - Modern React patterns (hooks, context API)
@@ -234,7 +239,7 @@ The project demonstrates:
 - State management without Redux
 - Next.js routing and file structure
 
-## 📝 Notes
+## Notes
 
 - All components are client-side (`'use client'`)
 - No external API calls yet (context-based sync only)
@@ -242,7 +247,7 @@ The project demonstrates:
 - Perfect for real-time demo on single browser/machine
 - Ready for WebSocket integration for multi-client sync
 
-## ✨ Highlights
+## Highlights
 
 1. **Clean Code**: Well-organized, readable, and maintainable
 2. **Type Safety**: Full TypeScript coverage
@@ -252,9 +257,9 @@ The project demonstrates:
 6. **Documentation**: Comprehensive README and dev guide
 7. **Scalable**: Easy to extend with WebSockets, DB, auth, etc.
 
-## 🎉 Ready for Review!
+## Ready for Review
 
-The application is fully functional and ready for testing. 
+The application is fully functional and ready for testing.
 
 **Try it out**:
 1. Start the dev server: `npm run dev`

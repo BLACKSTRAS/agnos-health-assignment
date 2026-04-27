@@ -16,14 +16,11 @@ import {
 export default function HomePage() {
     return (
         <div className="relative isolate overflow-hidden">
-            {/* Background Decorative Elements - ทำให้ดูมีมิติแบบแอปสมัยใหม่ */}
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                 <div className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#60a5fa] to-[#2563eb] opacity-10 sm:left-[calc(50%-30rem)] sm:w-288.75"></div>
             </div>
 
             <div className="max-w-6xl mx-auto py-20 px-6 lg:py-32">
-
-                {/* --- Hero Section --- */}
                 <div className="text-center mb-20">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm mb-8 animate-in slide-in-from-bottom-4 duration-700">
                         <span className="relative flex h-2 w-2">
@@ -44,10 +41,7 @@ export default function HomePage() {
                     </p>
                 </div>
 
-                {/* --- Action Bento Grid --- */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-
-                    {/* Patient Entry Card */}
                     <Link href="/patient" className="group relative overflow-hidden bg-slate-900 rounded-3xl p-10 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-200">
                         <div className="relative z-10">
                             <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mb-20 shadow-lg group-hover:scale-110 transition-transform">
@@ -61,13 +55,11 @@ export default function HomePage() {
                                 GO TO REGISTRATION <ArrowRight size={16} />
                             </div>
                         </div>
-                        {/* Background Pattern */}
                         <div className="absolute right-[-10%] top-[-10%] opacity-10 group-hover:opacity-20 transition-opacity">
                             <Activity size={300} className="text-white" />
                         </div>
                     </Link>
 
-                    {/* Staff Monitor Card */}
                     <Link href="/staff" className="group relative overflow-hidden bg-white rounded-3xl p-10 border border-slate-200 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-200">
                         <div className="relative z-10">
                             <div className="w-14 h-14 bg-slate-100 text-slate-900 rounded-2xl flex items-center justify-center mb-20 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
@@ -81,14 +73,12 @@ export default function HomePage() {
                                 OPEN DASHBOARD <ArrowRight size={16} />
                             </div>
                         </div>
-                        {/* Background Pattern */}
                         <div className="absolute right-[-10%] top-[-10%] opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
                             <Monitor size={300} className="text-slate-900" />
                         </div>
                     </Link>
                 </div>
 
-                {/* --- Trust & Tech Bar --- */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-slate-200 pt-16">
                     <FeatureItem
                         icon={<Zap size={20} className="text-blue-600" />}

@@ -1,9 +1,9 @@
 # Development Planning & Architecture
 
 ## Project Status
-✅ **Core Components Completed**
-- Patient Form with full field validation
-- Staff Real-time Monitoring Dashboard
+Core Components Completed
+- Patient intake form with full field validation
+- Staff real-time monitoring dashboard
 - Global state management with React Context API
 - Responsive UI with TailwindCSS
 - Navigation and routing
@@ -42,8 +42,8 @@ interface PatientData {
 
 ### 2. Component Architecture
 
-#### PatientForm Component
-**File**: `src/components/PatientForm.tsx`
+#### Patient Form Page
+**File**: `src/app/patient/page.tsx`
 
 **Responsibilities**:
 - Render form fields
@@ -58,8 +58,8 @@ interface PatientData {
 - Phone: 7-15 digits
 - Real-time field error clearing
 
-#### StaffView Component
-**File**: `src/components/StaffView.tsx`
+#### Staff Dashboard Page
+**File**: `src/app/staff/page.tsx`
 
 **Responsibilities**:
 - Display patient information in real-time
@@ -218,8 +218,8 @@ npm run build
 4. **DigitalOcean**: App Platform or VPS
 
 ### Environment Variables
-- `NEXT_PUBLIC_API_URL` - Backend API URL (if applicable)
-- `DATABASE_URL` - Database connection (for backend)
+- `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase public anon key
 
 ## Troubleshooting
 

@@ -4,7 +4,6 @@ import { createContext, useContext, useState, useCallback, useEffect, useRef, us
 import { supabase } from '@/lib/supabase';
 import { usePathname } from 'next/navigation';
 
-// --- Types & Interfaces ---
 export interface PatientData {
     id?: string;
     firstName: string;
@@ -31,7 +30,6 @@ interface PatientContextType {
     resetForm: () => void;
 }
 
-// --- Constants & Helpers ---
 const INITIAL_STATE: PatientData = {
     firstName: '', lastName: '', dateOfBirth: '', gender: '',
     phoneNumber: '', email: '', address: '', preferredLanguage: '',
@@ -39,7 +37,7 @@ const INITIAL_STATE: PatientData = {
     status: 'idle', lastUpdated: Date.now(),
 };
 
-const mapDBToState = (db: any): PatientData => ({
+const mapDBToState = (db: Record<string, any>): PatientData => ({
     id: db.id,
     firstName: db.first_name || '',
     middleName: db.middle_name || '',
@@ -85,10 +83,8 @@ export function PatientProvider({ children }: { children: ReactNode }) {
     const activeId = useRef<string | null>(null);
     const dataRef = useRef<PatientData>(patientData);
     const timer = useRef<NodeJS.Timeout | null>(null);
-
     const isStaff = usePathname()?.includes('/staff');
 
-    // --- Database Operations ---
     const syncWithDB = useCallback(async () => {
         const payload = mapStateToDB(dataRef.current);
         if (activeId.current) {
@@ -104,25 +100,26 @@ export function PatientProvider({ children }: { children: ReactNode }) {
         timer.current = setTimeout(syncWithDB, 1500);
     }, [syncWithDB]);
 
-    // --- Real-time Subscription (Staff only) ---
     useEffect(() => {
         if (!isStaff) return;
 
-        const loadAndListen = async () => {
+        const loadInitialData = async () => {
             const { data } = await supabase.from('patients').select('*').order('updated_at', { ascending: false }).limit(1).single();
             if (data) setPatientData(mapDBToState(data));
-
-            const channel = supabase.channel(`staff-sync-${Date.now()}`)
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'patients' },
-                    (p) => p.new && setPatientData(mapDBToState(p.new)))
-                .subscribe()
-
-            return () => { supabase.removeChannel(channel); };
         };
-        loadAndListen();
+
+        loadInitialData();
+
+        const channel = supabase.channel(`staff-sync-${Date.now()}`)
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'patients' },
+                (p) => p.new && setPatientData(mapDBToState(p.new)))
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
     }, [isStaff]);
 
-    // --- Handlers ---
     const updateField = useCallback(<K extends keyof PatientData>(field: K, value: PatientData[K]) => {
         setPatientData(prev => {
             const next = { ...prev, [field]: value, status: prev.status === 'idle' ? 'filling' : prev.status, lastUpdated: Date.now() };
@@ -145,7 +142,7 @@ export function PatientProvider({ children }: { children: ReactNode }) {
         setPatientData(prev => {
             const next = { ...prev, status, lastUpdated: Date.now() };
             dataRef.current = next;
-            syncWithDB(); // Submit ทันทีไม่ต้องรอ debounce
+            syncWithDB();
             return next;
         });
     }, [syncWithDB]);
